@@ -1,8 +1,84 @@
 import numpy as np
-import pandas as pd
-import re
-import functools
+import itertools
+import sys
 
-input = open('./input.txt', 'r')
+file = ''
+
+if len(sys.argv) != 2:
+    print("Usage: python3 task1.py [i|t]")
+    sys.exit(1)
+
+argument = sys.argv[1]
+
+if argument == "i":
+    file = 'input'
+elif argument == "t":
+    file = 'test'
+else:
+    print("Invalid argument. Use 'i' or 't'.")
+    sys.exit(1)
+
+input = open(f'./{file}.txt', 'r')
 lines = input.read().splitlines()
 input.close()
+
+def convert_to_2d(lines):
+    rows = []
+    for line in lines:
+        rows.append([c for c in line])
+    return np.array(rows)
+
+def create_dict(grid: np.ndarray):
+    d: dict[str, list[tuple[int, int]]] = dict()
+
+    for i in range(grid.shape[0]):
+        for j in range(grid.shape[1]):
+            if grid[i,j] != '.':
+                if not d.get(str(grid[i,j])): d[str(grid[i,j])] = []
+                d[str(grid[i,j])].append((i, j)) 
+            
+    return d
+
+def get_all_pairs(d: dict[str, list[tuple[int, int]]]):
+    all_pairs = dict()
+    for k in d.keys():
+        pairs = list(itertools.combinations(d[k], 2))
+        all_pairs[k] = pairs
+    return all_pairs
+
+def is_inside_boundary(pos, boundary):
+    i, j = pos
+    m, n = boundary
+    return 0 <= i < m and 0 <= j < n
+
+def delta_pos(p1, p2):
+    return p1[0] - p2[0], p1[1] - p2[1]
+
+def get_all_antinodes(all_pairs: dict, boundary):
+    antinodes_pos = set()
+    for k in all_pairs.keys():
+        for pair in all_pairs[k]:
+            antinodes = find_antinodes_for_pair(pair, boundary)
+            antinodes_pos = antinodes_pos.union(antinodes)
+    return antinodes_pos
+
+def find_antinodes_for_pair(pair, boundary):
+    antinodes_pos = set()
+    p1, p2 = pair
+    dx, dy = delta_pos(p1, p2)
+    
+    while is_inside_boundary(p1, boundary):
+        antinodes_pos.add(p1)
+        p1 = (p1[0] + dx, p1[1] + dy)
+        
+    while is_inside_boundary(p2, boundary):
+        antinodes_pos.add(p2)
+        p2 = (p2[0] - dx, p2[1] - dy)
+        
+    return antinodes_pos
+    
+grid = convert_to_2d(lines)
+d = create_dict(grid)
+all_pairs = get_all_pairs(d)
+antinodes = get_all_antinodes(all_pairs, grid.shape)
+print(len(antinodes))
