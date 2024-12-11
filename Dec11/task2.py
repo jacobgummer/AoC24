@@ -1,5 +1,5 @@
 import sys
-import re
+from time import time 
 
 file = ''
 
@@ -50,5 +50,9 @@ if not nums.get('0'):
     nums['0'] = 0
 nums = dict(sorted(nums.items()))
 
+start = time()
 transformed = blink(nums)
+end = time()
+
 print(sum(list(transformed.values())))
+print(f'Runtime: {(end - start) * 10**3} ms')

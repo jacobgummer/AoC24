@@ -1,6 +1,6 @@
-import numpy as np
 import sys
 import re
+from time import time 
 
 file = ''
 
@@ -54,5 +54,8 @@ def blink(nums: list[str], cache: dict[str, str], blinked=25):
 cached_transformations = {}
 cached_transformations['0'] = '1'
 
+start = time()
 transformed = blink(nums, cached_transformations)
+end = time()
 print(len(transformed))
+print(f'Runtime: {(end - start) * 10**3} ms')
