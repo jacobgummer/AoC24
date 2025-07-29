@@ -16,8 +16,8 @@ function task1()
   for r ∈ reports
     n = length(r)
     diffs = [r[i+1] - r[i] for i in 1:n-1]
-    increasing = map(d -> 1 <= d && d <= 3, diffs)
-    if all(increasing) || all(map(d -> -3 <= d && d <= -1, diffs))
+    increasing = map(d -> 1 <= d <= 3, diffs)
+    if all(increasing) || all(map(d -> -3 <= d <= -1, diffs))
       count += 1
     end
   end
