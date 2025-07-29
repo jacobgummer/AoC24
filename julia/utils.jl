@@ -1,7 +1,7 @@
 module Utils
-export get_lines_from_file
+export get_lines
 
-function get_lines_from_file(filename::String)
+function get_lines(filename::String)
   lines = open(filename) do file
     readlines(file)
   end
