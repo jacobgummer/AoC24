@@ -29,8 +29,8 @@ part1 input =
   let parsed = parseLine <$> input
       left = head <$> parsed
       right = (!! 1) <$> parsed
-      diffs = zipWith (-) (sort left) (sort right)
-   in sum $ abs <$> diffs
+      diffs = abs <$> zipWith (-) (sort left) (sort right)
+   in sum diffs
 
 count :: (Eq a) => a -> [a] -> Int
 count x = length . filter (== x)
