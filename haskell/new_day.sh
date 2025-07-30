@@ -11,7 +11,7 @@ fi
 # Format day number with leading zero (e.g., 3 -> 03)
 DAY=$(printf "%02d" "$1")
 DAYNAME="day${DAY}"
-FILENAME="app/Day${DAY}.hs"
+FILENAME="solutions/Day${DAY}.hs"
 
 if [ -e "$FILENAME" ]; then
   echo "File $FILENAME already exists."
