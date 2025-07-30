@@ -36,16 +36,16 @@ main = do
     1 -> do
       input <- readInputLines "data/inputs/day${DAY}.txt"
       case args of
-        ["t1"] -> print \$ part1 input
-        ["t2"] -> print \$ part2 input
-        _ -> putStrLn "Usage: ./day ${DAY} t1|t2 [-t]"
+        ["p1"] -> print \$ part1 input
+        ["p2"] -> print \$ part2 input
+        _ -> putStrLn "Usage: ./day ${DAY} p1|p2 [-t]"
     2 -> do
       input <- readInputLines "data/tests/day${DAY}.txt"
       case args of
-        ["t1", "-t"] -> print \$ part1 input
-        ["t2", "-t"] -> print \$ part2 input
-        _ -> putStrLn "Usage: ./day ${DAY} t1|t2 [-t]"
-    _ -> putStrLn "Usage: ./day ${DAY} t1|t2 [-t]"
+        ["p1", "-t"] -> print \$ part1 input
+        ["p2", "-t"] -> print \$ part2 input
+        _ -> putStrLn "Usage: ./day ${DAY} p1|p2 [-t]"
+    _ -> putStrLn "Usage: ./day ${DAY} p1|p2 [-t]"
 
 part1 :: [T.Text] -> Int
 part1 input = undefined

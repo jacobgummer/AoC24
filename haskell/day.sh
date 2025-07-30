@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ "$#" -lt 2 ]; then
-  echo "Usage: $0 <day> <t1|t2> [-t]"
+  echo "Usage: $0 <day> <p1|p2> [-t]"
   exit 1
 fi
 
