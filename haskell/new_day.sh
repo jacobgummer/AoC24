@@ -81,6 +81,7 @@ executable ${DAYNAME}
         , split
         , containers
         , mtl
+        , regex-tdfa
 EOF
   echo "Added 'executable ${DAYNAME}' to ${CABAL_FILE}"
 fi
