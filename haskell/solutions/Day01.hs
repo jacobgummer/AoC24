@@ -1,4 +1,5 @@
 import Common
+import Data.List (sort)
 import qualified Data.Text as T
 import System.Environment (getArgs)
 
@@ -20,8 +21,24 @@ main = do
         _ -> putStrLn "Usage: ./day 01 t1|t2 [-t]"
     _ -> putStrLn "Usage: ./day 01 t1|t2 [-t]"
 
+parseLine :: T.Text -> [Int]
+parseLine = map parseInt . T.words
+
 part1 :: [T.Text] -> Int
-part1 input = length input
+part1 input =
+  let parsed = parseLine <$> input
+      left = head <$> parsed
+      right = (!! 1) <$> parsed
+      diffs = zipWith (-) (sort left) (sort right)
+   in sum $ abs <$> diffs
+
+count :: (Eq a) => a -> [a] -> Int
+count x = length . filter (== x)
 
 part2 :: [T.Text] -> Int
-part2 input = undefined
+part2 input =
+  let parsed = parseLine <$> input
+      left = head <$> parsed
+      right = (!! 1) <$> parsed
+      similarities = (\x -> x * count x right) <$> left
+   in sum similarities
