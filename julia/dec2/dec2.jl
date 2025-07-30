@@ -1,13 +1,19 @@
 include("../utils.jl")
 using .Utils: get_lines
 
-which_task = length(ARGS) >= 1 ? strip(ARGS[1]) : error("specify which task to do (t1 or t2)")
+which_task = length(ARGS) >= 1 ?
+             strip(ARGS[1]) :
+             error("specify which task to do (t1 or t2)")
 is_test = false
 if length(ARGS) == 2
-  is_test = ARGS[2] == "test" ? true : error("snd argument must be \"test\" to do test")
+  is_test = ARGS[2] == "test" ?
+            true :
+            error("snd argument must be \"test\" to do test")
 end
 
-lines = is_test ? get_lines("test.txt") : get_lines("input.txt")
+lines = is_test ?
+        get_lines("test.txt") :
+        get_lines("input.txt")
 
 function task1()
   processed = [split(l) for l in lines]
@@ -16,8 +22,8 @@ function task1()
   for r ∈ reports
     n = length(r)
     diffs = [r[i+1] - r[i] for i in 1:n-1]
-    increasing = map(d -> 1 <= d && d <= 3, diffs)
-    if all(increasing) || all(map(d -> -3 <= d && d <= -1, diffs))
+    increasing = map(d -> 1 <= d <= 3, diffs)
+    if all(increasing) || all(map(d -> -3 <= d <= -1, diffs))
       count += 1
     end
   end
@@ -29,8 +35,7 @@ function task2()
     n = length(r)
     diffs = [r[i+1] - r[i] for i in 1:n-1]
     increasing = map(d -> 1 <= d <= 3, diffs)
-    decreasing = map(d -> -3 <= d <= -1, diffs)
-    return all(increasing) || all(decreasing)
+    return all(increasing) || all(map(d -> -3 <= d <= -1, diffs))
   end
   processed = [split(l) for l in lines]
   reports = [map(lvl -> parse(Int64, lvl), line) for line in processed]
