@@ -21,7 +21,7 @@ main = do
     _ -> putStrLn "Usage: ./day 01 t1|t2 [-t]"
 
 part1 :: [T.Text] -> Int
-part1 input = undefined
+part1 input = length input
 
 part2 :: [T.Text] -> Int
 part2 input = undefined
