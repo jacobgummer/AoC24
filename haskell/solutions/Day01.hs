@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 import Common
 import qualified Data.Text as T
 import System.Environment (getArgs)
