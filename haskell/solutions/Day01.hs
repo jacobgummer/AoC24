@@ -10,16 +10,16 @@ main = do
     1 -> do
       input <- readInputLines "data/inputs/day01.txt"
       case args of
-        ["t1"] -> print $ part1 input
-        ["t2"] -> print $ part2 input
-        _ -> putStrLn "Usage: ./day 01 t1|t2 [-t]"
+        ["p1"] -> print $ part1 input
+        ["p2"] -> print $ part2 input
+        _ -> putStrLn "Usage: ./day 01 p1|p2 [-t]"
     2 -> do
       input <- readInputLines "data/tests/day01.txt"
       case args of
-        ["t1", "-t"] -> print $ part1 input
-        ["t2", "-t"] -> print $ part2 input
-        _ -> putStrLn "Usage: ./day 01 t1|t2 [-t]"
-    _ -> putStrLn "Usage: ./day 01 t1|t2 [-t]"
+        ["p1", "-t"] -> print $ part1 input
+        ["p2", "-t"] -> print $ part2 input
+        _ -> putStrLn "Usage: ./day 01 p1|p2 [-t]"
+    _ -> putStrLn "Usage: ./day 01 p1|p2 [-t]"
 
 parseLine :: T.Text -> [Int]
 parseLine = map parseInt . T.words
